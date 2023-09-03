@@ -6,11 +6,11 @@ Record and display visitor visits with date, time, IP and User-Agent.
 
 # Info
 
-🔌 The "Custom Visitor Emails" plugin allows you to record and view visitor visits to your site. Every time a user, excluding the admin, accesses the site, the plugin automatically records the date 📅, time ⏰, IP address 🌐, and User-Agent 🕵️‍♂️ of the visit. Visits are emailed to the admin 📧 and displayed in a dedicated table 📊 on the plugin page with a dedicated menu 📋, along with date, time, IP address, and User-Agent details.
+The "Custom Visitor Emails" plugin allows you to record and view visitor visits to your site. Every time a user, excluding the admin, accesses the site, the plugin automatically records the date, time, IP address, and User-Agent of the visit. Visits are emailed to the admin and displayed in a dedicated table on the plugin page with a dedicated menu, along with date, time, IP address, and User-Agent details.
 
-The plugin offers the possibility to empty the logged visits table, providing a simple and convenient management option. Furthermore, the plugin allows you to edit the robots.txt 🤖 and .htaccess 🚫 files in order to block all visits that the admin deems inappropriate 🚫❌.
+The plugin offers the possibility to empty the logged visits table, providing a simple and convenient management option. Furthermore, the plugin allows you to edit the robots.txt and .htaccess files in order to block all visits that the admin deems inappropriate.
 
-An intuitive interface 🖥️ makes the "Custom Visitor Emails" plugin a useful tool for monitoring visitor activity on your WordPress site. 📈👀
+An intuitive interface makes the "Custom Visitor Emails" plugin a useful tool for monitoring visitor activity on your WordPress site.
 
 ## Features
 
