@@ -4,7 +4,7 @@
     "description": "Record and display visitor visits with date, time, IP and User-Agent.",
     "keywords": ["email","plugin","wordpress"],
     "homepage": "https://github.com/smal82/custom-visitor-emails",
-    "license": "GNU General Public License v2.0 or later",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "smal82",
