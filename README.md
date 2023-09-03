@@ -26,7 +26,7 @@ An intuitive interface makes the "Custom Visitor Emails" plugin a useful tool fo
 
 ## Bugs and Issues
 
-If you encounter any bugs or have issues with the plugin, please [open a new issue on GitHub](https://github.com/yourusername/custom-visitor-emails/issues).
+If you encounter any bugs or have issues with the plugin, please [open a new issue on GitHub](https://github.com/smal82/custom-visitor-emails/issues).
 
 ## License
 
