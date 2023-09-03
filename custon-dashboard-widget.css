@@ -1,0 +1,18 @@
+.custom_widget_btn {
+           width: "auto";
+             
+            color: #000; /* Colore del testo */
+              list-style-type: none; /* Rimuove i punti dell'elenco */
+            display: inline; /* Posiziona tutti i punti dell'elenco sulla stessa riga */
+        }
+               
+        .custom_widget_btn  a {
+           text-decoration: none; /* Rimuove la sottolineatura dei link */
+             color: #000; /* Colore del testo */
+             padding: 5px; /* Aggiunge spazio interno ai pulsanti */
+              margin-right: 10px; /* Aggiunge spazio tra i pulsanti */
+               cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+                background-color: #E0E0E0; /* Colore di sfondo */
+                  border-radius: 5px; /* Aggiunge angoli arrotondati */
+                   border: 1px solid #E0E0E0; /* Rimuove il bordo */
+        }
