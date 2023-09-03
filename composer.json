@@ -1,0 +1,19 @@
+{
+    "name": "smal82/custom-visitor-emails",
+    "type": "library",
+    "description": "Record and display visitor visits with date, time, IP and User-Agent.",
+    "keywords": ["email","php","plugin","wordpress"],
+    "homepage": "https://github.com/smal82/custom-visitor-emails",
+    "license": "GPL-2.0 License",
+    "authors": [
+        {
+            "name": "smal82",
+            "email": "smaldiscord@gmail.com",
+            "homepage": "https://smal.netsons.org/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.0"
+    }
+}
