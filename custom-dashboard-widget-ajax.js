@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
         }
     });
 
-    // Aggiorna il widget ogni 60 secondi (o con la frequenza desiderata)
+    // Aggiorna il widget ogni 15 secondi (o con la frequenza desiderata)
     setInterval(function() {
         $.ajax({
             url: custom_dashboard_widget_ajax.ajaxurl,
@@ -19,5 +19,5 @@ jQuery(document).ready(function($) {
                 $('#custom-dashboard-widget-container').html(response);
             }
         });
-    }, 60000); // 60 secondi
+    }, 15000); // 60 secondi
 });

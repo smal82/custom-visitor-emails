@@ -243,7 +243,7 @@ fclose($file2);
 function custom_register_dashboard_widget() {
     wp_add_dashboard_widget(
         'custom_dashboard_widget',
-        'Ultime 5 Visite',
+        'Custom Visitor Emails',
         'custom_dashboard_widget_content'
     );
     
@@ -261,7 +261,7 @@ add_action('wp_dashboard_setup', 'custom_register_dashboard_widget');
 
 // Funzione per visualizzare il contenuto del widget
 function custom_dashboard_widget_content() {
-    echo '<div>';
+    echo '<h1 style="text-align: center;">Ultime 10 visite</h1><br/>';
     echo '<table class="widefat striped responsive">';
     echo '<thead>';
     echo '<tr>';
@@ -274,7 +274,6 @@ function custom_dashboard_widget_content() {
     echo '<tbody id="custom-dashboard-widget-container">';
     echo '</tbody>';
  echo '</table>';
-echo '</div>';
 echo '<div style="text-align: center;">';
 echo '<h2>Seleziona una pagina:</h2><br/>';
 echo ' <div class="custom_widget_btn">';
@@ -295,7 +294,7 @@ function custom_dashboard_widget_refresh() {
     $table_name = $wpdb->prefix . 'custom_visitor_visits';
 
     // Recupera le ultime 5 visite dalla tabella
-    $visits = $wpdb->get_results("SELECT * FROM $table_name ORDER BY id DESC LIMIT 5");
+    $visits = $wpdb->get_results("SELECT * FROM $table_name ORDER BY id DESC LIMIT 10");
 
     if (!empty($visits)) {
         foreach ($visits as $visit) {
