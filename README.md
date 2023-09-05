@@ -1,5 +1,5 @@
 # Custom Visitor Emails Plugin
-[![License](https://poser.pugx.org/automattic/jetpack/license.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![Total Downloads](http://poser.pugx.org/smal82/custom-visitor-emails/downloads)](https://packagist.org/packages/smal82/custom-visitor-emails)  [![Monthly Downloads](http://poser.pugx.org/smal82/custom-visitor-emails/d/monthly)](https://packagist.org/packages/smal82/custom-visitor-emails)  [![Daily Downloads](http://poser.pugx.org/smal82/custom-visitor-emails/d/daily)](https://packagist.org/packages/smal82/custom-visitor-emails)
+[![License](https://poser.pugx.org/automattic/jetpack/license.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 Record and display visitor visits with date, time, IP and User-Agent.
 
