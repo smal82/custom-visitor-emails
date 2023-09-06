@@ -23,7 +23,7 @@ An intuitive interface makes the "Custom Visitor Emails" plugin a useful tool fo
 
 ## Installation
 
-1. Upload the `custom-visitor-emails` folder to the `/wp-content/plugins/` directory.
+1. Upload the `custom-visitor-emails` zip file to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 ## Bugs and Issues
