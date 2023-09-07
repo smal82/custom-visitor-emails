@@ -1,5 +1,6 @@
 # Custom Visitor Emails Plugin
-[![License](https://poser.pugx.org/automattic/jetpack/license.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
+[![License](https://poser.pugx.org/automattic/jetpack/license.svg)](https://www.gnu.org/licenses/gpl-2.0.html) ![Static Badge](https://img.shields.io/badge/release-v1.0.1-blue)
+
 
 Record and display visitor visits with date, time, IP and User-Agent.
 
