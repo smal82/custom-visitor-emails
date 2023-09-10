@@ -73,8 +73,16 @@ add_action('wp', 'custom_record_visit');
 
 // Pagina di impostazioni
 function custom_settings_page() {
+
+wp_enqueue_style('pagination', plugin_dir_url(__FILE__) . 'pagination.css');
+
+
     global $wpdb;
     $table_name = $wpdb->prefix . 'custom_visitor_visits';
+
+$per_page = 50; // Numero di record da visualizzare per pagina
+$page_number = isset($_GET['page_number']) ? intval($_GET['page_number']) : 1;
+$offset = ($page_number - 1) * $per_page;
 
     // Gestione dell'eliminazione della tabella
     if (isset($_POST['delete_visits'])) {
@@ -82,7 +90,7 @@ function custom_settings_page() {
         echo '<div class="notice notice-success"><p>Tabella delle visite svuotata con successo.</p></div>';
     }
 
-    $visits = $wpdb->get_results("SELECT * FROM $table_name ORDER BY id DESC", ARRAY_A);
+    $visits = $wpdb->get_results("SELECT * FROM $table_name ORDER BY id DESC LIMIT $per_page OFFSET $offset", ARRAY_A);
     ?>
     <div class="wrap">
         <h2>Impostazioni Custom Visitor Emails</h2>
@@ -108,9 +116,105 @@ function custom_settings_page() {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+<?php
+
+$total_records = $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
+$total_pages = ceil($total_records / $per_page);
+
+if ($total_pages > 1) {
+    echo '<div>';
+    
+ $NUMPERPAGE = $per_page; // max. number of items to display per page
+  $this_page = "";
+  $data = range(1, $total_records); // data array to be paginated
+ // $num_results = count($data);
+ $num_results = $total_records;
+  
+  if(!isset($_GET['page_number']) || !$page_number = intval($_GET['page_number'])) {
+    $page_number = 1;
+  }
+
+  // build array containing links to all pages
+  $tmp = [];
+  for($p=1, $i=0; $i < $num_results; $p++, $i += $NUMPERPAGE) {
+    if($page_number == $p) {
+      // current page shown as bold, no link
+      $tmp[] = " <span class=\"pagination\"><b>{$p}</b></span> ";
+    } else {
+      $tmp[] = " <span class=\"pagination\"><a href=\"?page=custom-plugin-table&{$this_page}page_number={$p}\">{$p}</a></span> ";
+    }
+  }
+
+  // thin out the links (optional)
+  for($i = count($tmp) - 5; $i > 1; $i--) {
+    if(abs($page_number - $i - 1) > 4) {
+      unset($tmp[$i]);
+    }
+  }
+
+  // display page navigation iff data covers more than one page
+  if(count($tmp) > 1) {
+    echo "<p>";
+
+     if((!$page_number) Or ($page_number == 1))  {
+      // display 'Page'
+      echo "<span class=\"pagination\">Page</span> ";
+    }  elseif($page_number > 1) {
+      // display 'Prev' link
+      echo " <span class=\"pagination\"><a href=\"?page=custom-plugin-table&{$this_page}page_number=" . ($page_number - 1) . "\">&laquo; Prev</a></span> ";
+    } else {
+      echo "Page ";
+    }
+
+    $lastlink = 0;
+    foreach($tmp as $i => $link) {
+      if($i > $lastlink + 1) {
+        echo "  <span class=\"pagination\">...</span>  "; // where one or more links have been omitted
+      } elseif($i) {
+        echo " ";
+      }
+      echo $link;
+      $lastlink = $i;
+    }
+
+    if($page_number <= $lastlink) {
+      // display 'Next' link
+      echo " <span class=\"pagination\"><a href=\"?page=custom-plugin-table&{$this_page}page_number=" . ($page_number + 1) . "\">Next &raquo;</a></span> ";
+    }
+
+    echo "</p>\n\n";
+  }
+  
+  
+  // Display the number of ID records - Not needed for me
+ /* $data = new \ArrayIterator($data); // NOT needed if $data is already an Iterator!
+  $it = new \LimitIterator($data, ($page_number - 1) * $NUMPERPAGE, $NUMPERPAGE);
+  try {
+    $it->rewind();
+    foreach($it as $row) {
+      echo " " .$row. " "; // display record
+    }
+  } catch(\OutOfBoundsException $e) {
+    echo "Error: Caught OutOfBoundsException";
+  }*/
+  
+
+ /*   if ($page_number > 1) {
+        echo ' <a href="?page=custom-plugin-table&page_number=' . ($page_number - 1) . '">Pagina precedente</a> - ';
+    }
+    if ($page_number < $total_pages) {
+        echo ' <a href="?page=custom-plugin-table&page_number=' . ($page_number + 1) . '">Pagina successiva</a> ';
+    } */
+    echo '</div>';
+}
+
+
+
+?>
+
             <p><input type="submit" class="button button-secondary" name="delete_visits" value="Svuota Tabella" onclick="return confirm('Sei sicuro di voler svuotare la tabella? Questa azione non può essere annullata.');"></p>
         </form>
-    </div>
+   </div>
     <?php
 }
 
@@ -181,7 +285,7 @@ function custom_plugin_robots_page() {
     if (isset($_POST['save_robots'])) {
       //  $robots_content = sanitize_text_field($_POST['robots_content']);
  $robots_content = $_POST['robots_content'];
- $robots_content = htmlspecialchars($robots_content, ENT_QUOTES, 'UTF-8');
+ //$robots_content = htmlspecialchars($robots_content, ENT_QUOTES, 'UTF-8');
     //    file_put_contents($robots_txt_path, $robots_content);
 $file = fopen($robots_txt_path, "w");
 fwrite($file, $robots_content);
@@ -256,12 +360,14 @@ function custom_register_dashboard_widget() {
 //Includi il css
 wp_enqueue_style('custom-dashboard-widget-btn', plugin_dir_url(__FILE__) . 'custon-dashboard-widget.css');
 
+
 }
 add_action('wp_dashboard_setup', 'custom_register_dashboard_widget');
 
 // Funzione per visualizzare il contenuto del widget
 function custom_dashboard_widget_content() {
-    echo '<h1 style="text-align: center;">Ultime 10 visite</h1><br/>';
+    echo '<div>';
+    echo '<h1 style="text-align: center;">Ultime 10 visite</h1>';
     echo '<table class="widefat striped responsive">';
     echo '<thead>';
     echo '<tr>';
@@ -274,6 +380,7 @@ function custom_dashboard_widget_content() {
     echo '<tbody id="custom-dashboard-widget-container">';
     echo '</tbody>';
  echo '</table>';
+echo '</div>';
 echo '<div style="text-align: center;">';
 echo '<h2>Seleziona una pagina:</h2><br/>';
 echo ' <div class="custom_widget_btn">';
