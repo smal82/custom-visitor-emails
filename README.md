@@ -18,7 +18,7 @@ An intuitive interface makes the "Custom Visitor Emails" plugin a useful tool fo
 - View all visits in a table;
 - Edit the robots.txt file;
 - Edit the .htaccess file;
-- Displays an automatically updating widget every 60 in the Dashboard with the last 5 visits;
+- Displays an automatically updating widget every 15 in the Dashboard with the last 10 visits;
 - Send an email to the admin for each visit with the information collected;
 - Exclude admin from detection.
 
