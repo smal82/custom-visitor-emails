@@ -3,8 +3,8 @@
 Plugin Name: Custom Visitor Emails
 Plugin URI:  https://wordpress.org/plugins/custom-visitor-emails
 Description: Registra le visite e mostra i dettagli delle visite nella pagina di impostazioni.
-Version: 1.0
-Author: smal
+Version: 1.0.2
+Author: smalmet
 Author URI: https://smal.netsons.org/
 License:     GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -50,7 +50,11 @@ function custom_record_visit() {
     $visit_time = date_i18n('H:i:s');
     $ip_address = $_SERVER['REMOTE_ADDR'];
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
+$server_ip = $_SERVER['SERVER_ADDR'];
 
+
+// Verifica se $user_agent non contiene la parola "WordPress" e se $ip_address è diverso dall'IP del server
+if (strpos($user_agent, 'WordPress') === false || $ip_address !== $server_ip) {
     $wpdb->insert(
         $table_name,
         array(
@@ -67,6 +71,8 @@ function custom_record_visit() {
     $message = "Il tuo sito è stato appena visualizzato da un visitatore: $visit_date - $visit_time\nIndirizzo IP dell'utente: $ip_address\nUser-Agent: $user_agent";
 
     wp_mail($admin_email, $subject, $message);
+
+} //ciclo IF per il cron
 }
 }
 add_action('wp', 'custom_record_visit');
