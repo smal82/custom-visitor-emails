@@ -2,7 +2,7 @@
 [![License](https://poser.pugx.org/automattic/jetpack/license.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 
-Record and display visitor visits with date, time, IP and User-Agent.
+Record and view visits with date, time, IP and User-Agent. Block crawlers and bots via robots.txt and .htaccess.
 
 
 # Info
