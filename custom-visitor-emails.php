@@ -4,7 +4,7 @@ Plugin Name: Custom Visitor Emails
 Plugin URI:  https://wordpress.org/plugins/custom-visitor-emails
 Description: Registra le visite e mostra i dettagli delle visite nella pagina di impostazioni.
 Version: 1.0.2
-Author: smalmet
+Author: smalnet
 Author URI: https://smal.netsons.org/
 License:     GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -54,7 +54,12 @@ $server_ip = $_SERVER['SERVER_ADDR'];
 
 
 // Verifica se $user_agent non contiene la parola "WordPress" e se $ip_address è diverso dall'IP del server
-if (strpos($user_agent, 'WordPress') === false || $ip_address !== $server_ip) {
+//if ((strpos($user_agent, 'WordPress') === false) || ($ip_address !== $server_ip)) {
+
+if ((strpos($user_agent, 'WordPress') === false) || (strpos($user_agent, 'wp.com') === false)) {
+    // Verifica se $ip_address è diverso da server
+    if ($ip_address !== $server_ip) {
+
     $wpdb->insert(
         $table_name,
         array(
@@ -72,7 +77,7 @@ if (strpos($user_agent, 'WordPress') === false || $ip_address !== $server_ip) {
 
     wp_mail($admin_email, $subject, $message);
 
-} //ciclo IF per il cron
+} } //ciclo IF per il cron
 }
 }
 add_action('wp', 'custom_record_visit');
@@ -116,7 +121,7 @@ $offset = ($page_number - 1) * $per_page;
                         <tr>
                             <td><?php echo $visit['visit_date']; ?></td>
                             <td><?php echo $visit['visit_time']; ?></td>
-                            <td><a href="https://whatismyip.live/ip/<?php echo $visit['ip_address']; ?>" target="_blank"><?php echo $visit['ip_address']; ?></a></td>
+                            <td><a href="https://www.geolocation.com/it?ip=<?php echo $visit['ip_address']; ?>#ipresult" target="_blank"><?php echo $visit['ip_address']; ?></a></td>
                             <td><?php echo $visit['user_agent']; ?></td>
                         </tr>
                     <?php endforeach; ?>
@@ -415,7 +420,7 @@ function custom_dashboard_widget_refresh() {
             echo '<tr>';
             echo '<td>' . esc_html($visit->visit_date) . '</td>';
             echo '<td>' . esc_html($visit->visit_time) . '</td>';
-            echo '<td><a href="https://whatismyip.live/ip/' . esc_html($visit->ip_address) . '" target="_blank">' . esc_html($visit->ip_address) . '</a></td>';
+            echo '<td><a href="https://www.geolocation.com/it?ip=' . esc_html($visit->ip_address) . '#ipresult" target="_blank">' . esc_html($visit->ip_address) . '</a></td>';
             echo '<td>' . esc_html($visit->user_agent) . '</td>';
             echo '</tr>';
 
