@@ -72,10 +72,68 @@ if ((strpos($user_agent, 'WordPress') === false) || (strpos($user_agent, 'wp.com
 
     // Invio dell'email all'admin
     $admin_email = get_option('admin_email');
-    $subject = 'Nuova visita sul sito';
-    $message = "Il tuo sito è stato appena visualizzato da un visitatore: $visit_date - $visit_time\nIndirizzo IP dell'utente: $ip_address\nUser-Agent: $user_agent";
+    $site_name = get_bloginfo('name');
+    $subject = 'Nuova visita sul sito ' . $site_name;
+    $message = "<!DOCTYPE html><html>";
+$message .= "<head>
+    <style>
+       /* Stile per il contenitore principale */
+        .container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-    wp_mail($admin_email, $subject, $message);
+        /* Stile per le colonne */
+        .column{
+            width: 50%;
+            text-align: left;
+            box-sizing: border-box;
+	font-size:18px;
+ text-decoration: none;
+color: black;
+padding: 10px;
+  background-color: white;
+border: 1px dotted black;
+}
+
+a, a:link, a:visited {
+  background-color: white;
+  color: black;
+  border: 1px solid blue;
+  padding: 10px;
+   text-decoration: none;
+ /* display: inline-block; */
+  border-radius: 10px;
+}
+
+a:hover, a:active {
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+padding: 10px;
+text-decoration: none;
+}
+	h1 {
+  text-align: center;
+font-size:50px;
+}
+    </style>
+</head>";
+
+$message .= "<body>";
+$message .= "<h1>" . $site_name . "</h1><p style='font-size:30px;'>Il tuo sito è stato appena visualizzato da un visitatore:</p>";
+$message .= "<div class='container'>";
+$message .= "<div class='column'>Data: </div><div class='column'>il <strong>" . $visit_date . "</strong> alle <strong>" .$visit_time . "</strong></div></div>";
+$message .= "<div class='container'>";
+$message .= "<div class='column'>Indirizzo IP dell'utente: </div><div class='column'><a href='https://www.geolocation.com/it?ip=" . $ip_address . "#ipresult' target='_blank'>" . $ip_address . "</a></div></div>";
+$message .= "<div class='container'>";
+$message .= "<div class='column'>User-Agent: </div><div class='column'><strong>" . $user_agent. "</strong></div></div>";
+$message .= "</body></html>";
+
+$headers123 = array('MIME-Version: 1.0n', 'Content-Type: text/html; charset=UTF-8');
+
+    wp_mail($admin_email, $subject, $message, $headers123);
 
 } } //ciclo IF per il cron
 }
